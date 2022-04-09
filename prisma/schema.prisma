@@ -14,18 +14,27 @@ model User {
   updatedAt     DateTime    @updatedAt
   deletedAt     DateTime?
   events        Event[]
+  consents      Consent[]
 }
 
 model Event {
-  id           String      @id @default(uuid())
-  consent      Consent
-  enabled      Boolean     @default(true)
-  user         User        @relation(fields: [userId], references: [id])
+  id           String       @id @default(uuid())
+  type         ConsentType
+  enabled      Boolean      @default(true)
+  user         User         @relation(fields: [userId], references: [id])
   userId       String
-  createdAt    DateTime    @default(now())
+  createdAt    DateTime     @default(now())
 }
 
-enum Consent {
-  email_notification
-  sms_notification
+model Consent {
+  userId       String
+  type         ConsentType
+  enabled      Boolean
+  user         User        @relation(fields: [userId], references: [id])
+  @@unique([userId, type])
+}
+
+enum ConsentType {
+  email_notifications
+  sms_notifications
 }

@@ -28,7 +28,11 @@ class UserHandler {
     }
 
     try {
-      const user = await db.user.create({ data: { email } });
+      const user = await db.user.create({
+        data: { email },
+        include: { consents: true },
+      });
+
       return user;
     } catch (error) {
       // This is prisma's way of complaining about a non unique value
@@ -48,7 +52,10 @@ class UserHandler {
    * @throws {NotFoundError}
    */
   static async get(id: string) {
-    const user = await db.user.findUnique({ where: { id } });
+    const user = await db.user.findUnique({
+      where: { id },
+      include: { consents: true },
+    });
 
     if (!user) {
       throw new NotFoundError('The user was not found');

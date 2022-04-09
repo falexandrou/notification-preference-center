@@ -1,15 +1,16 @@
-import { Consent, Event } from '@prisma/client';
+import { ConsentType, Event } from '@prisma/client';
 
 import db from '../lib/db';
 import { CONSENT_TYPES } from '../constants';
 import { ValidationError } from '../lib/errors';
+import ConsentHandler from './consent';
 
 export type CreateEventPayload = {
   user?: {
     id?: string;
   },
   consents?: Array<{
-    id: Consent,
+    id: ConsentType,
     enabled: boolean,
   }>;
 };
@@ -44,7 +45,7 @@ class EventHandler {
     }
 
     const { count } = await db.event.createMany({
-      data: consents.map(({ id: consent, enabled }) => ({ consent, enabled, userId })),
+      data: consents.map(({ id: type, enabled }) => ({ type, enabled, userId })),
     });
 
     const events = await db.event.findMany({
@@ -52,6 +53,9 @@ class EventHandler {
       orderBy: { createdAt: 'desc' },
       take: count,
     })
+
+    // Store the consents for the user
+    await ConsentHandler.record(userId);
 
     return events;
   }
