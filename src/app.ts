@@ -1,7 +1,8 @@
 import cors from 'cors';
-import express from 'express';
+import express, { Request, Response } from 'express';
 
-import { createUser, getUsers, getUserById, deleteUser, createEvent } from './routes';
+import { ApiError } from './lib/errors';
+import { createUser, getUserById, deleteUser, createEvent } from './routes';
 
 const app = express();
 
@@ -9,8 +10,19 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+app.use((error: Error, req: Request, res: Response, next: Function) => {
+  if (res.headersSent) {
+    return next(error);
+  }
+
+  if (error instanceof ApiError) {
+    return res.status(error.httpStatusCode).json({ error: error.message });
+  }
+
+  return res.status(500).json({ error: error.message });
+});
+
 // Users endpoints
-app.get('/users', getUsers);
 app.post('/users', createUser);
 app.get('/users/:id', getUserById);
 app.delete('/users/:id', deleteUser);
