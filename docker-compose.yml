@@ -8,9 +8,7 @@ services:
       sh -c "
         yarn &&
         yarn run prisma migrate dev
-        yarn run dev
-      "
-    # command: tail -F -n0 /etc/hosts
+        yarn run dev"
     volumes:
       - ./:/src/:delegated
       - volume_node_modules:/src/node_modules
