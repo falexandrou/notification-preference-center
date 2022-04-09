@@ -3,7 +3,14 @@ version: "2"
 services:
   app:
     image: node:17-alpine
-    command: yarn && yarn run prisma migrate dev & yarn run dev
+    working_dir: /src
+    command: >
+      sh -c "
+        yarn &&
+        yarn run prisma migrate dev
+        yarn run dev
+      "
+    # command: tail -F -n0 /etc/hosts
     volumes:
       - ./:/src/:delegated
       - volume_node_modules:/src/node_modules
