@@ -53,6 +53,6 @@ export const deleteUser = async (req: Request, res: Response) => {
 export const createEvent = async (req: Request, res: Response) => {
   const events = await EventHandler.create(req.body);
 
-  res.status(201).send(EventSerializer.list(events));
+  res.status(201).json(EventSerializer.list(events));
 };
 

@@ -1,4 +1,4 @@
-import { ConsentType, Event, Prisma } from '@prisma/client';
+import { Event, Prisma } from '@prisma/client';
 import db from '../lib/db';
 
 class ConsentHandler {
@@ -17,12 +17,12 @@ class ConsentHandler {
           MAX(createdAt)
           FROM Event ee
         WHERE
-          ee.userId = '${userId}'
+          ee.userId = ${userId}
         GROUP BY
           ee.userId, type
         ORDER BY
           createdAt DESC
-      ) AND e.userId = '${userId}';`
+      ) AND e.userId = ${userId}`
 
     return await db.$queryRaw<Event[]>(sql);
   }
@@ -32,7 +32,7 @@ class ConsentHandler {
    *
    * @param {String} userId the id for the user to calculate the consents for
    */
-  static async record(userId: string) {
+  static async record(userId: string): Promise<void> {
     const events = await ConsentHandler.mostRecentEvents(userId);
 
     await db.$transaction(
@@ -46,11 +46,11 @@ class ConsentHandler {
           },
           create: {
             type,
-            enabled,
+            enabled: Boolean(enabled),
             userId,
           },
           update: {
-            enabled,
+            enabled: Boolean(enabled),
           },
         })
       )),

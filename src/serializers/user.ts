@@ -9,10 +9,10 @@ class UserSerializer extends Serializer {
    * @param {User} model the user to serialize
    * @returns {Object}
    */
-  serialize(model: User & { consents: Consent[] }): object {
+  serialize(model: User & { consents: Consent[] }) {
     return {
       id: model.id,
-      emai: model.email,
+      email: model.email,
       consents: ConsentSerializer.list(model.consents),
     };
   }

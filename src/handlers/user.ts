@@ -17,14 +17,14 @@ class UserHandler {
    * @throws {ValidationError}
    */
   static async create(data: CreateUserPayload = {}): Promise<User> {
-    const { email } = data;
+    const { email = '' } = data;
 
-    if (!isNil(email) || !(typeof email === 'string')) {
+    if (isNil(email)) {
       throw new ValidationError('The user’s email is required');
     }
 
     if (!isEmail(email)) {
-      throw new ValidationError('The user’s email is required');
+      throw new ValidationError('You have to provide a valid email');
     }
 
     try {

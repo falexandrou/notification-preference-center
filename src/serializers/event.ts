@@ -8,7 +8,7 @@ class EventSerializer extends Serializer {
    * @param {Event} model the event to serialize
    * @returns {Object}
    */
-  serialize(model: Event): object {
+  serialize(model: Event) {
     return {
       id: model.id,
       type: model.type,

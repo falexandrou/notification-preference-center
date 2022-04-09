@@ -1,4 +1,4 @@
-import { Consent } from '@prisma/client';
+import { Consent, ConsentType } from '@prisma/client';
 import Serializer from '../lib/serializer';
 
 class ConsentSerializer extends Serializer {
@@ -8,7 +8,7 @@ class ConsentSerializer extends Serializer {
    * @param {Event} model the event to serialize
    * @returns {Object}
    */
-  serialize(model: Consent): object {
+  serialize(model: Consent) {
     return {
       id: model.type,
       enabled: model.enabled,
