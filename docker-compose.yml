@@ -1,1 +1,46 @@
 ---
+version: "2"
+services:
+  app:
+    image: node:17-alpine
+    command: yarn && yarn run prisma migrate dev & yarn run dev
+    volumes:
+      - ./:/src/:delegated
+      - volume_node_modules:/src/node_modules
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      - NODE_ENV:${NODE_ENV}
+      - PORT=${PORT}
+      - APP_HOST=${APP_HOST}
+      - DATABASE_URL=mysql://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}
+      - TEST_DATABASE_URL=mysql://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${TEST_DB_NAME}
+    networks:
+      - notifications
+
+  db:
+    image: mysql:8.0.28
+    command:
+      - mysqld
+      - '--character-set-server=utf8mb4'
+      - '--collation-server=utf8mb4_unicode_ci'
+      - '--default-authentication-plugin=mysql_native_password'
+      - '--sql-mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - volume_database:/var/lib/mysql
+    ports:
+      - "13306:3306"
+    networks:
+      - notifications
+
+volumes:
+  volume_node_modules:
+  volume_database:
+
+networks:
+  notifications:
+    driver: bridge
