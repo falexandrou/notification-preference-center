@@ -1,0 +1,12 @@
+type: object
+properties:
+  id:
+    description: Event ID
+    $ref: ./shared/UUID.yaml
+  type:
+    description: Consent type
+    $ref: ./shared/ConsentType.yaml
+  enabled:
+    description: Whether the consent is enabled or not
+    type: boolean
+    example: true

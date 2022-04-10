@@ -1,0 +1,63 @@
+---
+get:
+  tags:
+    - User
+  summary: Get a User by id
+  description: Return a User by a given id
+  operationId: getUserById
+  parameters:
+    - name: id
+      in: path
+      description: The id of the user to get
+      required: true
+      schema:
+        $ref: ../schema/shared/UUID.yaml
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../schema/User.yaml
+    '404':
+      description: User not found
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+
+delete:
+  tags:
+    - User
+  summary: Delete a User by id
+  description: Delete a User by a given id
+  operationId: deleteUserById
+  parameters:
+    - name: id
+      in: path
+      description: The id of the user to delete
+      required: true
+      schema:
+        $ref: ../schema/shared/UUID.yaml
+  responses:
+    '204':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties: []
+
+    '404':
+      description: User not found
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+

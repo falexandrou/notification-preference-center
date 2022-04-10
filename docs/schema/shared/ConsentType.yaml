@@ -1,0 +1,5 @@
+type: string
+enum:
+  - email_notifications
+  - sms_notifications
+example: email_notifications

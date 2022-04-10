@@ -1,0 +1,15 @@
+type: object
+properties:
+  id:
+    description: User ID
+    $ref: ./shared/UUID.yaml
+  email:
+    description: User's email
+    type: string
+    format: email
+    example: someone@somewhere.com
+  consents:
+    type: array
+    description: The user's consents
+    items:
+      $ref: ./Consent.yaml

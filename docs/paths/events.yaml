@@ -1,0 +1,45 @@
+---
+post:
+  summary: Create a new event
+  operationId: createEvent
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type:
+            object
+          properties:
+            user:
+              type: object
+              properties:
+                id:
+                  description: the id of the user associated with the event
+                  $ref: ../schema/shared/UUID.yaml
+            consents:
+              type: object
+              properties:
+                id:
+                  description: the consent type to use
+                  $ref: ../schema/Consent.yaml
+                enabled:
+                  description: whether the consent is enabled
+                  type: boolean
+                  example: true
+  responses:
+    '201':
+      description: Created
+      content:
+        application/json:
+          schema:
+            $ref: ../schema/Event.yaml
+    '422':
+      description: Unprocessable Entity
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: error message
+                example: Something went wrong
