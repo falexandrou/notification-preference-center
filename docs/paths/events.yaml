@@ -1,5 +1,7 @@
 ---
 post:
+  tags:
+    -  Event
   summary: Create a new event
   operationId: createEvent
   requestBody:
