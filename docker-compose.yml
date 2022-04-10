@@ -4,6 +4,7 @@ services:
   app:
     image: node:17-alpine
     working_dir: /src
+    container_name: notifiations_center_app
     command: >
       sh -c "
         yarn &&
@@ -28,6 +29,7 @@ services:
 
   db:
     image: mysql:8.0.28
+    container_name: notifiations_center_db
     command:
       - mysqld
       - '--character-set-server=utf8mb4'
