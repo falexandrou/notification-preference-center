@@ -41,7 +41,7 @@ export const deleteUser = async (req: Request, res: Response) => {
   const { params: { id } } = req;
   await UserHandler.delete(id);
 
-  res.status(204).end(); // No Content
+  res.status(204).json({});
 };
 
 /**

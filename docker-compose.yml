@@ -18,10 +18,11 @@ services:
       - db
     environment:
       - NODE_ENV:${NODE_ENV}
-      - PORT=${PORT}
+      - APP_PORT=${APP_PORT}
       - APP_HOST=${APP_HOST}
       - DATABASE_URL=mysql://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}
       - TEST_DATABASE_URL=mysql://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${TEST_DB_NAME}
+      - TEST_APP_PORT=${TEST_APP_PORT}
     networks:
       - notifications
 

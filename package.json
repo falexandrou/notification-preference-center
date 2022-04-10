@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/index.ts",
-    "test": "DATABASE_URL=$TEST_DATABASE_URL && yarn run prisma migrate dev && jest --bail --verbose --detectOpenHandles --watchAll"
+    "test": "APP_PORT=$TEST_APP_PORT DATABASE_URL=$TEST_DATABASE_URL && yarn run prisma migrate reset --force && jest --bail --verbose --detectOpenHandles --watchAll"
   },
   "repository": {
     "type": "git",
@@ -40,9 +40,11 @@
     "@types/express": "^4.17.13",
     "@types/jest": "^27.4.1",
     "@types/node": "^17.0.23",
+    "@types/supertest": "^2.0.12",
     "jest": "^27.5.1",
     "nodemon": "^2.0.15",
     "prisma": "^3.12.0",
+    "supertest": "^6.2.2",
     "ts-jest": "^27.1.4",
     "ts-node": "^10.7.0",
     "typescript": "^4.6.3"

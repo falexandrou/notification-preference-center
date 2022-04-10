@@ -70,8 +70,17 @@ class UserHandler {
    * @param {String} id the id of the user to delete
    */
   static async delete(id: string) {
-    await db.user.update({
+    const user = await db.user.findUnique({
       where: { id },
+      include: { consents: true },
+    });
+
+    if (!user) {
+      throw new NotFoundError('The user was not found');
+    }
+
+    await db.user.update({
+      where: { id: user.id },
       data: { deletedAt: new Date() },
     });
   }
