@@ -16,15 +16,11 @@ post:
                   description: the id of the user associated with the event
                   $ref: ../schema/shared/UUID.yaml
             consents:
-              type: object
-              properties:
-                id:
-                  description: the consent type to use
-                  $ref: ../schema/Consent.yaml
-                enabled:
-                  description: whether the consent is enabled
-                  type: boolean
-                  example: true
+              type: array
+              description: the user's consent preferences
+              items:
+                $ref: ../schema/Consent.yaml
+
   responses:
     '201':
       description: Created
