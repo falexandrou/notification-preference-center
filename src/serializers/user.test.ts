@@ -31,12 +31,12 @@ describe('UserSerializer', () => {
   });
 
   it('serializes a user object', () => {
-    const { id, email, consents } = user!
+    const { id: userId, email: userEmail, consents } = user!;
     const serialized = UserSerializer.model(user!);
     expect(serialized).toBeInstanceOf(Object);
     expect(serialized).toEqual({
-      id,
-      email,
+      id: userId,
+      email: userEmail,
       consents: consents.map(({ type: id, enabled }) => ({ id, enabled })),
     });
   });

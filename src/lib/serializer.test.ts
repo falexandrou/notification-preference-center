@@ -5,7 +5,7 @@ type MockModel = {
   firstName: string;
   emailAddress: string;
   phoneNumber: string;
-}
+};
 
 class MockSerializer extends Serializer {
   serialize(model: MockModel): object {

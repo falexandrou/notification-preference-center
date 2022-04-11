@@ -1,13 +1,13 @@
 import faker from '@faker-js/faker';
 import { Consent, ConsentType } from '@prisma/client';
-import db from '../lib/db';
 import ConsentSerializer from './consent';
+import db from '../lib/db';
 
 describe('ConsentSerializer', () => {
   let consent: Consent;
 
   beforeEach(async () => {
-    const user = await db.user.create({ data: { email: faker.internet.email() } })
+    const user = await db.user.create({ data: { email: faker.internet.email() } });
 
     consent = await db.consent.create({
       data: {

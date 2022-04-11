@@ -1,5 +1,5 @@
 import faker from '@faker-js/faker';
-import { getMockReq, getMockRes } from '@jest-mock/express'
+import { getMockReq, getMockRes } from '@jest-mock/express';
 import { ConsentType, User } from '@prisma/client';
 import db from './lib/db';
 import { createUser, getUserById, deleteUser, createEvent } from './routes';
@@ -8,7 +8,7 @@ describe('Routes - Integration', () => {
   describe('createUser', () => {
     it('creates the user, returns 201 for a valid payload', async () => {
       const email = faker.internet.email();
-      const req = getMockReq({ body: { email } })
+      const req = getMockReq({ body: { email } });
       const { res } = getMockRes();
 
       await createUser(req, res);
@@ -17,7 +17,7 @@ describe('Routes - Integration', () => {
       expect(res.json).toHaveBeenCalledWith(
         expect.objectContaining({ email, consents: [] }),
       );
-    })
+    });
   });
 
   describe('getUserById', () => {
@@ -85,7 +85,7 @@ describe('Routes - Integration', () => {
         expect.arrayContaining([
           expect.objectContaining({ type: ConsentType.email_notifications, enabled: true }),
         ]),
-      )
+      );
     });
 
     it('creates multiple events', async () => {

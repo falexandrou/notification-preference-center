@@ -7,7 +7,7 @@ describe('EventSerializer', () => {
   let event: Event;
 
   beforeEach(async () => {
-    const user = await db.user.create({ data: { email: faker.internet.email() } })
+    const user = await db.user.create({ data: { email: faker.internet.email() } });
 
     event = await db.event.create({
       data: {

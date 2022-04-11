@@ -55,4 +55,3 @@ export const createEvent = async (req: Request, res: Response) => {
 
   res.status(201).json(EventSerializer.list(events));
 };
-

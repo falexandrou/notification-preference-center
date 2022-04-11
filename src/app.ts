@@ -1,7 +1,6 @@
 import cors from 'cors';
 import express, { Request, Response, NextFunction } from 'express';
-import expressRouter from "express-promise-router";
-
+import expressRouter from 'express-promise-router';
 import { ApiError } from './lib/errors';
 import { createUser, getUserById, deleteUser, createEvent } from './routes';
 
