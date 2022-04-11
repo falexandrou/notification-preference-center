@@ -1,4 +1,4 @@
-import { Consent, ConsentType } from '@prisma/client';
+import { Consent } from '@prisma/client';
 import Serializer from '../lib/serializer';
 
 class ConsentSerializer extends Serializer {

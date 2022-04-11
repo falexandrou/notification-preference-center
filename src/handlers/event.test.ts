@@ -22,7 +22,7 @@ describe('EventHandler', () => {
       await db.user.deleteMany({ where: { id: userId } });
 
       expect(EventHandler.create({ user: { id: userId } })).rejects.toThrow(
-        `User with ID ${userId} does not exist`
+        `User with ID ${userId} does not exist`,
       );
     });
 

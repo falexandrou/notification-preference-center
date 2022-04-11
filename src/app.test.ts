@@ -4,15 +4,6 @@ import request from 'supertest';
 import app from './app';
 import db from './lib/db';
 
-/*
-router.post('/users', createUser);
-router.get('/users/:id', getUserById);
-router.delete('/users/:id', deleteUser);
-
-// Events endpoints
-router.post('/events', createEvent);
-*/
-
 describe('POST /users', () => {
   it('returns a 422 HTTP error when the email is not provided', async () => {
     const response = await request(app)
@@ -52,7 +43,8 @@ describe('POST /users', () => {
     const email = faker.internet.email();
 
     const response = await request(app)
-      .post('/users') .send({ email })
+      .post('/users')
+      .send({ email })
       .set('Accept', 'application/json');
 
     expect(response.headers['content-type']).toMatch(/json/);
@@ -136,7 +128,6 @@ describe('POST /events', () => {
     );
   });
 });
-
 
 describe('Example with subsequent updates', () => {
   it('creates a user, consents and returns the expected payload', async () => {

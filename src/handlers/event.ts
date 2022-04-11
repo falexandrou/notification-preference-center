@@ -56,7 +56,7 @@ class EventHandler {
       where: { userId },
       orderBy: { createdAt: 'desc' },
       take: count,
-    })
+    });
 
     // Store the consents for the user
     await ConsentHandler.record(userId);

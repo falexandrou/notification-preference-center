@@ -1,7 +1,7 @@
 import faker from '@faker-js/faker';
-import db from '../lib/db';
 import { ConsentType, Event, User } from '@prisma/client';
 import ConsentHandler from './consent';
+import db from '../lib/db';
 
 describe('ConsentHandler', () => {
   let emailEvent: Event;

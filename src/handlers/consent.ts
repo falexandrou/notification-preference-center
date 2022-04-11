@@ -22,9 +22,10 @@ class ConsentHandler {
           ee.userId, type
         ORDER BY
           createdAt DESC
-      ) AND e.userId = ${userId}`
+      ) AND e.userId = ${userId}`;
 
-    return await db.$queryRaw<Event[]>(sql);
+    const events = await db.$queryRaw<Event[]>(sql);
+    return events;
   }
 
   /**
@@ -42,7 +43,7 @@ class ConsentHandler {
             userId_type: {
               userId,
               type,
-            }
+            },
           },
           create: {
             type,

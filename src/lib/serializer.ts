@@ -28,7 +28,7 @@ abstract class Serializer {
    */
   static list<T extends Serializer>(this: ConstructorOf<T>, models: object[]): object[] {
     const instance = new this();
-    return models.map(model => instance.serialize(model));
+    return models.map((model) => instance.serialize(model));
   }
 }
 
