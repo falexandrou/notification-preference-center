@@ -8,7 +8,7 @@ To run the project with Docker, simply run:
 docker-compose up
 ```
 
-This will start a MySQL and the App developer, migrate the database and start the server. The app will be available at [http://localhost:3000](http://localhost:3000)
+This will start a MySQL and the App containers, migrate the database and start the server. The app will be available at [http://localhost:3000](http://localhost:3000)
 
 ### Running without Docker
 To start the project without docker you need to do the following:
