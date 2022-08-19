@@ -1,4 +1,4 @@
-## Notification Center
+## Notification Preference Center
 The notification center, is an API you can use as a micro-service in order to store notification consents provided by your users
 
 ### Running the project with Docker
